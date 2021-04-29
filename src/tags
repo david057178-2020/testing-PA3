@@ -1,0 +1,203 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+ALL_ONE	atpg.h	48;"	d
+ALL_ZERO	atpg.h	49;"	d
+AND	atpg.h	28;"	d
+ANDTABLE	logic_tbl.h	/^int ANDTABLE[MULTIVALUE][MULTIVALUE] = {0, 0, 0, 0, 0,  \/\/0$/;"	v
+ATPG	atpg.cpp	/^ATPG::ATPG() {$/;"	f	class:ATPG
+ATPG	atpg.h	/^class ATPG {$/;"	c
+B	logic_tbl.h	8;"	d
+BUF	atpg.h	34;"	d
+CFLAGS	makefile	/^CFLAGS = -std=c++11 -g  $/;"	m
+CONFLICT	podem.cpp	10;"	d	file:
+D	atpg.h	57;"	d
+D	logic_tbl.h	7;"	d
+D_bar	atpg.h	58;"	d
+EQV	atpg.h	35;"	d
+EQVTABLE	logic_tbl.h	/^int EQVTABLE[MULTIVALUE][MULTIVALUE] = {1, 0, U, B, D,$/;"	v
+FALSE	atpg.h	42;"	d
+FAULT	atpg.cpp	/^ATPG::FAULT::FAULT() {$/;"	f	class:ATPG::FAULT
+FAULT	atpg.h	/^  class FAULT {$/;"	c	class:ATPG
+FILES	makefile	/^FILES = atpg.o main.o input.o level.o sim.o podem.o init_flist.o faultsim.o display.o tdfsim.o$/;"	m
+FindType	input.cpp	/^int ATPG::FindType(const string &gatetype) {$/;"	f	class:ATPG
+GI	atpg.h	52;"	d
+GO	atpg.h	53;"	d
+HASHSIZE	atpg.h	23;"	d
+INPUT	atpg.h	29;"	d
+INV	logic_tbl.h	/^int INV[MULTIVALUE] = {1, 0, U, B, D};$/;"	v
+MAYBE	atpg.h	40;"	d
+MULTIVALUE	logic_tbl.h	5;"	d
+Mask	atpg.h	/^  unsigned int Mask[16] = {0x00000003, 0x0000000c, 0x00000030, 0x000000c0,$/;"	m	class:ATPG
+NAND	atpg.h	27;"	d
+NODE	atpg.cpp	/^ATPG::NODE::NODE() {$/;"	f	class:ATPG::NODE
+NODE	atpg.h	/^  class NODE {$/;"	c	class:ATPG
+NOR	atpg.h	30;"	d
+NOT	atpg.h	26;"	d
+OR	atpg.h	31;"	d
+ORTABLE	logic_tbl.h	/^int ORTABLE[MULTIVALUE][MULTIVALUE] = {0, 1, U, D, B,$/;"	v
+OUTPUT	atpg.h	32;"	d
+PEQUIV	faultsim.cpp	/^unsigned int ATPG::PEQUIV(const unsigned int &value1, const unsigned int &value2) {$/;"	f	class:ATPG
+PEXOR	faultsim.cpp	/^unsigned int ATPG::PEXOR(const unsigned int &value1, const unsigned int &value2) {$/;"	f	class:ATPG
+PINV	faultsim.cpp	/^unsigned int ATPG::PINV(const unsigned int &value) {$/;"	f	class:ATPG
+REDUNDANT	atpg.h	43;"	d
+SCVCC	atpg.h	36;"	d
+STF	atpg.h	47;"	d
+STR	atpg.h	46;"	d
+STUCK0	atpg.h	44;"	d
+STUCK1	atpg.h	45;"	d
+TRUE	atpg.h	41;"	d
+U	atpg.h	56;"	d
+U	logic_tbl.h	6;"	d
+Unknown	atpg.h	/^  unsigned int Unknown[16] = {0x00000001, 0x00000004, 0x00000010, 0x00000040,$/;"	m	class:ATPG
+WIRE	atpg.cpp	/^ATPG::WIRE::WIRE() {$/;"	f	class:ATPG::WIRE
+WIRE	atpg.h	/^  class WIRE {$/;"	c	class:ATPG
+XOR	atpg.h	33;"	d
+XORTABLE	logic_tbl.h	/^int XORTABLE[MULTIVALUE][MULTIVALUE] = {0, 1, U, D, B,$/;"	v
+backtrack_limit	atpg.h	/^  int backtrack_limit;$/;"	m	class:ATPG
+backward_imply	podem.cpp	/^int ATPG::backward_imply(const wptr current_wire, const int &desired_logic_value) {$/;"	f	class:ATPG
+check_test	podem.cpp	/^bool ATPG::check_test() {$/;"	f	class:ATPG
+cktin	atpg.h	/^  vector<wptr> cktin;                  \/* input wire list *\/$/;"	m	class:ATPG
+cktout	atpg.h	/^  vector<wptr> cktout;                 \/* output wire list *\/$/;"	m	class:ATPG
+combine	faultsim.cpp	/^void ATPG::combine(const wptr w, unsigned int &new_value) {$/;"	f	class:ATPG
+compute_fault_coverage	init_flist.cpp	/^void ATPG::compute_fault_coverage() {$/;"	f	class:ATPG
+create_dummy_gate	init_flist.cpp	/^void ATPG::create_dummy_gate() {$/;"	f	class:ATPG
+create_structure	input.cpp	/^void ATPG::create_structure() {$/;"	f	class:ATPG
+ctoi	sim.cpp	/^int ATPG::ctoi(const char &c) {$/;"	f	class:ATPG
+debug	atpg.h	/^  int debug;                           \/* != 0 if debugging;  this is a switch of debug mode *\/$/;"	m	class:ATPG
+detect	atpg.h	/^    short detect;              \/* detection flag *\/$/;"	m	class:ATPG::FAULT
+display_circuit	input.cpp	/^void ATPG::display_circuit() {$/;"	f	class:ATPG
+display_fault	display.cpp	/^void ATPG::display_fault(fptr f) {$/;"	f	class:ATPG
+display_io	display.cpp	/^void ATPG::display_io() {$/;"	f	class:ATPG
+display_line	display.cpp	/^void ATPG::display_line(fptr fault) {$/;"	f	class:ATPG
+display_undetect	display.cpp	/^void ATPG::display_undetect() {$/;"	f	class:ATPG
+eqv_fault_num	atpg.h	/^    int eqv_fault_num;         \/* accumulated number of equivalent faults from PI to PO, see initflist.cpp *\/$/;"	m	class:ATPG::FAULT
+error	input.cpp	/^void ATPG::error(const string &message) {$/;"	f	class:ATPG
+evaluate	sim.cpp	/^void ATPG::evaluate(nptr n) {$/;"	f	class:ATPG
+fault_evaluate	podem.cpp	/^ATPG::wptr ATPG::fault_evaluate(const fptr fault) {$/;"	f	class:ATPG
+fault_flag	atpg.h	/^    int fault_flag = 0;            \/* 32 bit, indicates the fault-injected bit position, for pfedfs *\/$/;"	m	class:ATPG::WIRE
+fault_no	atpg.h	/^    int fault_no;              \/* fault index *\/$/;"	m	class:ATPG::FAULT
+fault_sim_a_vector	faultsim.cpp	/^void ATPG::fault_sim_a_vector(const string &vec, int &num_of_current_detect) {$/;"	f	class:ATPG
+fault_sim_evaluate	faultsim.cpp	/^void ATPG::fault_sim_evaluate(const wptr w) {$/;"	f	class:ATPG
+fault_simulate_vectors	faultsim.cpp	/^void ATPG::fault_simulate_vectors(int &total_detect_num) {$/;"	f	class:ATPG
+fault_type	atpg.h	/^    short fault_type;          \/* s-a-1 or s-a-0 or slow-to-rise or slow-to-fall fault *\/$/;"	m	class:ATPG::FAULT
+file_no	atpg.h	/^  int file_no;                         \/* number of current file *\/$/;"	m	class:ATPG
+filename	atpg.h	/^  string filename;                     \/* current input file *\/$/;"	m	class:ATPG
+find_easiest_control	podem.cpp	/^ATPG::wptr ATPG::find_easiest_control(const nptr n) {$/;"	f	class:ATPG
+find_hardest_control	podem.cpp	/^ATPG::wptr ATPG::find_hardest_control(const nptr n) {$/;"	f	class:ATPG
+find_pi_assignment	podem.cpp	/^ATPG::wptr ATPG::find_pi_assignment(const wptr object_wire, const int &object_level) {$/;"	f	class:ATPG
+find_propagate_gate	podem.cpp	/^ATPG::nptr ATPG::find_propagate_gate(const int &level) {$/;"	f	class:ATPG
+flag	atpg.h	/^    int flag = 0;                  \/* 32 bit, records state of wire *\/$/;"	m	class:ATPG::WIRE
+flist	atpg.h	/^  forward_list<fptr_s> flist;          \/* fault list *\/$/;"	m	class:ATPG
+flist_undetect	atpg.h	/^  forward_list<fptr> flist_undetect;   \/* undetected fault list *\/$/;"	m	class:ATPG
+forward_imply	podem.cpp	/^void ATPG::forward_imply(const wptr w) {$/;"	f	class:ATPG
+fptr	atpg.h	/^  typedef FAULT *fptr;                 \/* using pointer to access\/manipulate the instances of FAULT *\/$/;"	t	class:ATPG
+fptr_s	atpg.h	/^  typedef unique_ptr<FAULT> fptr_s;    \/* using smart pointer to hold\/maintain the instances of FAULT *\/$/;"	t	class:ATPG
+fsim_only	atpg.h	/^  bool fsim_only;                      \/* flag to indicate fault simulation only *\/$/;"	m	class:ATPG
+generate_fault_list	init_flist.cpp	/^void ATPG::generate_fault_list() {$/;"	f	class:ATPG
+generate_tdfault_list	tdfsim.cpp	/^void ATPG::generate_tdfault_list() {$/;"	f	class:ATPG
+get_faulty_wire	faultsim.cpp	/^ATPG::wptr ATPG::get_faulty_wire(const fptr f, int &fault_type) {$/;"	f	class:ATPG
+get_tdfsim_only	atpg.h	/^  bool get_tdfsim_only() { return tdfsim_only; }$/;"	f	class:ATPG
+getnode	input.cpp	/^ATPG::nptr ATPG::getnode(const string &nodename) {$/;"	f	class:ATPG
+getwire	input.cpp	/^ATPG::wptr ATPG::getwire(const string &wirename) {$/;"	f	class:ATPG
+has_fault_at	atpg.h	/^    bool has_fault_at(int bit_position) { return fault_flag & (3 << (bit_position << 1)); }$/;"	f	class:ATPG::WIRE
+hash_nlist	atpg.h	/^  array<forward_list<nptr_s>, HASHSIZE> hash_nlist;   \/* hashed node list *\/$/;"	m	class:ATPG
+hash_wlist	atpg.h	/^  array<forward_list<wptr_s>, HASHSIZE> hash_wlist;   \/* hashed wire list *\/$/;"	m	class:ATPG
+hashcode	input.cpp	/^int ATPG::hashcode(const string &name) {$/;"	f	class:ATPG
+in_vector_no	atpg.h	/^  int in_vector_no;                    \/* number of test vectors generated *\/$/;"	m	class:ATPG
+index	atpg.h	/^    short index;               \/* index for GI fault. it represents the  $/;"	m	class:ATPG::FAULT
+inject_fault_at	atpg.h	/^    void inject_fault_at(int bit_position) { fault_flag |= (3 << (bit_position << 1)); }  \/\/  inject a fault at bit position.  Two bits (11) means this position is a fault.  When parallel fault sim, this corresponds to fault position in wire_value2 $/;"	f	class:ATPG::WIRE
+inject_fault_value	faultsim.cpp	/^void ATPG::inject_fault_value(const wptr faulty_wire, const int &bit_position, const int &fault_type) {$/;"	f	class:ATPG
+inode	atpg.h	/^    vector<nptr> inode;        \/* nodes driving this wire *\/$/;"	m	class:ATPG::WIRE
+input	input.cpp	/^void ATPG::input(const string &infile) {$/;"	f	class:ATPG
+io	atpg.h	/^    short io;                  \/* 0 = GI; 1 = GO *\/$/;"	m	class:ATPG::FAULT
+is_	atpg.h	/^    bool is_(int type) { return flag & type; }$/;"	f	class:ATPG::WIRE
+is_all_assigned	atpg.h	/^    bool is_all_assigned() { return flag & 2; }$/;"	f	class:ATPG::WIRE
+is_changed	atpg.h	/^    bool is_changed() { return flag & 128; }$/;"	f	class:ATPG::WIRE
+is_fault_injected	atpg.h	/^    bool is_fault_injected() { return flag & 32; }$/;"	f	class:ATPG::WIRE
+is_faulty	atpg.h	/^    bool is_faulty() { return flag & 64; }$/;"	f	class:ATPG::WIRE
+is_input	atpg.h	/^    bool is_input() { return flag & 4; }$/;"	f	class:ATPG::WIRE
+is_marked	atpg.h	/^    bool is_marked() { return flag & 16; }$/;"	f	class:ATPG::WIRE
+is_marked	atpg.h	/^    bool is_marked() { return marked; }$/;"	f	class:ATPG::NODE
+is_output	atpg.h	/^    bool is_output() { return flag & 8; }$/;"	f	class:ATPG::WIRE
+is_scheduled	atpg.h	/^    bool is_scheduled() { return flag & 1; }$/;"	f	class:ATPG::WIRE
+itoc	init_flist.cpp	/^char ATPG::itoc(const int &i) {$/;"	f	class:ATPG
+iwire	atpg.h	/^    vector<wptr> iwire;        \/* wires driving this node *\/$/;"	m	class:ATPG::NODE
+level	atpg.h	/^    int level;                 \/* level of the wire *\/$/;"	m	class:ATPG::WIRE
+level_circuit	level.cpp	/^void ATPG::level_circuit() {$/;"	f	class:ATPG
+lineno	atpg.h	/^  int lineno;                          \/* current line number *\/$/;"	m	class:ATPG
+main	main.cpp	/^int main(int argc, char *argv[]) {$/;"	f
+mark_propagate_tree	podem.cpp	/^void ATPG::mark_propagate_tree(const nptr n) {$/;"	f	class:ATPG
+marked	atpg.h	/^    bool marked;$/;"	m	class:ATPG::NODE
+name	atpg.h	/^    string name;               \/* ascii name of node *\/$/;"	m	class:ATPG::NODE
+name	atpg.h	/^    string name;               \/* ascii name of wire *\/$/;"	m	class:ATPG::WIRE
+newgate	input.cpp	/^void ATPG::newgate() {$/;"	f	class:ATPG
+nfind	input.cpp	/^ATPG::nptr ATPG::nfind(const string &name) {$/;"	f	class:ATPG
+node	atpg.h	/^    nptr node;                 \/* gate under test(NIL if PI\/PO fault) *\/$/;"	m	class:ATPG::FAULT
+nptr	atpg.h	/^  typedef NODE *nptr;                 \/* using pointer to access\/manipulate the instances of NODE *\/$/;"	t	class:ATPG
+nptr_s	atpg.h	/^  typedef unique_ptr<NODE> nptr_s;    \/* using smart pointer to hold\/maintain the instances of NODE *\/$/;"	t	class:ATPG
+num_of_faults_in_parallel	faultsim.cpp	11;"	d	file:
+num_of_gate_fault	atpg.h	/^  int num_of_gate_fault;    \/\/ total number of gate-level uncollapsed faults in the whole circuit$/;"	m	class:ATPG
+num_of_pattern	tdfsim.cpp	12;"	d	file:
+onode	atpg.h	/^    vector<nptr> onode;        \/* nodes driven by this wire *\/$/;"	m	class:ATPG::WIRE
+owire	atpg.h	/^    vector<wptr> owire;        \/* wires driven by this node *\/$/;"	m	class:ATPG::NODE
+parse_line	input.cpp	/^void ATPG::parse_line(const string &line) {$/;"	f	class:ATPG
+podem	podem.cpp	/^int ATPG::podem(const fptr fault, int &current_backtracks) {$/;"	f	class:ATPG
+read_vectors	input.cpp	/^void ATPG::read_vectors(const string &vetFile) {$/;"	f	class:ATPG
+rearrange_gate_inputs	level.cpp	/^void ATPG::rearrange_gate_inputs() {$/;"	f	class:ATPG
+remove_	atpg.h	/^    void remove_(int type) { flag &= ~type; }$/;"	f	class:ATPG::WIRE
+remove_all_assigned	atpg.h	/^    void remove_all_assigned() { flag &= ~2; }$/;"	f	class:ATPG::WIRE
+remove_changed	atpg.h	/^    void remove_changed() { flag &= ~128; }$/;"	f	class:ATPG::WIRE
+remove_fault_injected	atpg.h	/^    void remove_fault_injected() { flag &= ~32; }$/;"	f	class:ATPG::WIRE
+remove_faulty	atpg.h	/^    void remove_faulty() { flag &= ~64; }$/;"	f	class:ATPG::WIRE
+remove_input	atpg.h	/^    void remove_input() { flag &= ~4; }$/;"	f	class:ATPG::WIRE
+remove_marked	atpg.h	/^    void remove_marked() { flag &= ~16; }$/;"	f	class:ATPG::WIRE
+remove_marked	atpg.h	/^    void remove_marked() { marked = false; }$/;"	f	class:ATPG::NODE
+remove_output	atpg.h	/^    void remove_output() { flag &= ~8; }$/;"	f	class:ATPG::WIRE
+remove_scheduled	atpg.h	/^    void remove_scheduled() { flag &= ~1; }$/;"	f	class:ATPG::WIRE
+set_	atpg.h	/^    void set_(int type) { flag |= type; }$/;"	f	class:ATPG::WIRE
+set_all_assigned	atpg.h	/^    void set_all_assigned() { flag |= 2; }     \/\/ Set all assigned if both assign 0 and assign 1 already tried.$/;"	f	class:ATPG::WIRE
+set_backtrack_limit	main.cpp	/^void ATPG::set_backtrack_limit(const int &i) {$/;"	f	class:ATPG
+set_changed	atpg.h	/^    void set_changed() { flag |= 128; }        \/\/ Set changed if the logic value on this wire has recently been changed.$/;"	f	class:ATPG::WIRE
+set_fault_free	atpg.h	/^    void set_fault_free() { fault_flag &= ALL_ZERO; }$/;"	f	class:ATPG::WIRE
+set_fault_injected	atpg.h	/^    void set_fault_injected() { flag |= 32; }  \/\/ Set fault injected if fault inject to the wire.$/;"	f	class:ATPG::WIRE
+set_faulty	atpg.h	/^    void set_faulty() { flag |= 64; }          \/\/ Set faulty if the wire is faulty.$/;"	f	class:ATPG::WIRE
+set_fsim_only	main.cpp	/^void ATPG::set_fsim_only(const bool &b) {$/;"	f	class:ATPG
+set_input	atpg.h	/^    void set_input() { flag |= 4; }            \/\/ Set input if the wire is PI.$/;"	f	class:ATPG::WIRE
+set_input	input.cpp	/^void ATPG::set_input(const bool &pori) {$/;"	f	class:ATPG
+set_marked	atpg.h	/^    void set_marked() { flag |= 16; }          \/\/ Set marked when the wire is already leveled.$/;"	f	class:ATPG::WIRE
+set_marked	atpg.h	/^    void set_marked() { marked = true; }          \/\/ Set marked if this node is on the path to PO.$/;"	f	class:ATPG::NODE
+set_output	atpg.h	/^    void set_output() { flag |= 8; }           \/\/ Set output if the wire is PO.$/;"	f	class:ATPG::WIRE
+set_output	input.cpp	/^void ATPG::set_output() {$/;"	f	class:ATPG
+set_scheduled	atpg.h	/^    void set_scheduled() { flag |= 1; }        \/\/ Set scheduled when the input of the gate driving it change.$/;"	f	class:ATPG::WIRE
+set_tdfsim_only	main.cpp	/^void ATPG::set_tdfsim_only(const bool &b) {$/;"	f	class:ATPG
+set_total_attempt_num	main.cpp	/^void ATPG::set_total_attempt_num(const int &i) {$/;"	f	class:ATPG
+set_uniquely_implied_value	podem.cpp	/^int ATPG::set_uniquely_implied_value(const fptr fault) {$/;"	f	class:ATPG
+sim	sim.cpp	/^void ATPG::sim() {$/;"	f	class:ATPG
+sort_wlist	atpg.h	/^  vector<wptr> sort_wlist;             \/* sorted wire list with regard to level *\/$/;"	m	class:ATPG
+targc	atpg.h	/^  int targc;                           \/* number of args on current command line *\/$/;"	m	class:ATPG
+targv	atpg.h	/^  string targv[100];                   \/* tokens on current command line *\/$/;"	m	class:ATPG
+tdfsim_only	atpg.h	/^  bool tdfsim_only;                    \/* flag to indicate tdfault simulation only *\/$/;"	m	class:ATPG
+test	atpg.cpp	/^void ATPG::test() {$/;"	f	class:ATPG
+test_possible	podem.cpp	/^ATPG::wptr ATPG::test_possible(const fptr fault) {$/;"	f	class:ATPG
+test_tried	atpg.h	/^    bool test_tried;           \/* flag to indicate test is being tried *\/$/;"	m	class:ATPG::FAULT
+timer	input.cpp	/^void ATPG::timer(FILE *file, const string &mesg1) {$/;"	f	class:ATPG
+to_swlist	atpg.h	/^    int to_swlist;             \/* index to the sort_wlist[] *\/$/;"	m	class:ATPG::FAULT
+total_attempt_num	atpg.h	/^  int total_attempt_num;               \/* number of test generation attempted for each fault  *\/$/;"	m	class:ATPG
+trace_unknown_path	podem.cpp	/^bool ATPG::trace_unknown_path(const wptr w) {$/;"	f	class:ATPG
+transition_delay_fault_simulation	tdfsim.cpp	/^void ATPG::transition_delay_fault_simulation(int &total_detect_num) {$/;"	f	class:ATPG
+type	atpg.h	/^    int type;                  \/* node type,  AND OR BUF INPUT OUTPUT ... *\/$/;"	m	class:ATPG::NODE
+unmark_propagate_tree	podem.cpp	/^void ATPG::unmark_propagate_tree(const nptr n) {$/;"	f	class:ATPG
+usage	main.cpp	/^void usage() {$/;"	f
+value	atpg.h	/^    int value;                 \/* logic value [0|1|2] of the wire (2 = unknown)  $/;"	m	class:ATPG::WIRE
+vectors	atpg.h	/^  vector<string> vectors;              \/* vector set *\/$/;"	m	class:ATPG
+wfind	input.cpp	/^ATPG::wptr ATPG::wfind(const string &name) {$/;"	f	class:ATPG
+wire_value1	atpg.h	/^    int wire_value1;           \/* (32 bits) represents fault-free value for this wire. $/;"	m	class:ATPG::WIRE
+wire_value2	atpg.h	/^    int wire_value2;           \/* (32 bits) represents values of this wire $/;"	m	class:ATPG::WIRE
+wlist_faulty	atpg.h	/^  forward_list<wptr> wlist_faulty;$/;"	m	class:ATPG
+wlist_index	atpg.h	/^    int wlist_index;           \/* index into the sorted_wlist array *\/$/;"	m	class:ATPG::WIRE
+wptr	atpg.h	/^  typedef WIRE *wptr;                 \/* using pointer to access\/manipulate the instances of WIRE *\/$/;"	t	class:ATPG
+wptr_s	atpg.h	/^  typedef unique_ptr<WIRE> wptr_s;    \/* using smart pointer to hold\/maintain the instances of WIRE *\/$/;"	t	class:ATPG
