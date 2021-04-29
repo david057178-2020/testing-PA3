@@ -23,16 +23,20 @@ void ATPG::transition_delay_fault_simulation(int &total_detect_num) {
 }
 
 void ATPG::generate_tdfault_list() {
+    wptr w;
+    nptr n;
+    fptr_s f;
     //walk through every wire in the circuit
     for(auto pos: sort_wlist){
         //target wire
-        wptr w = pos;
+        w = pos;
         //target gate
-        nptr n = w->inode.frount();
+        n = w->inode.front();
+
 
         //create a gate output SA0 for target gate
         //create a new fault
-        fptr_s f = move(fptr_s(new(nothrow) FAULT));
+        f = move(fptr_s(new(nothrow) FAULT));
         if (f == nullptr) error("No more room!");
         //setting the fault
         f->eqv_fault_num = 1;
@@ -114,5 +118,4 @@ void ATPG::generate_tdfault_list() {
 	    ++fault_num;
 	    cout << f->fault_no << f->node->name << ":" << (f->io?"O":"I") << (f->io?9:(f->index)) << "SA" << f->fault_type << endl;
 	}
-	fprintf(stdout, "#number of equivalent faults = %d\n", fault_num);	
 }//end gen fault list
