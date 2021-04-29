@@ -142,6 +142,7 @@ nptr_s	atpg.h	/^  typedef unique_ptr<NODE> nptr_s;    \/* using smart pointer to
 num_of_faults_in_parallel	faultsim.cpp	11;"	d	file:
 num_of_gate_fault	atpg.h	/^  int num_of_gate_fault;    \/\/ total number of gate-level uncollapsed faults in the whole circuit$/;"	m	class:ATPG
 num_of_pattern	tdfsim.cpp	12;"	d	file:
+num_of_tdfaults_in_parallel	tdfsim.cpp	13;"	d	file:
 onode	atpg.h	/^    vector<nptr> onode;        \/* nodes driven by this wire *\/$/;"	m	class:ATPG::WIRE
 owire	atpg.h	/^    vector<wptr> owire;        \/* wires driven by this node *\/$/;"	m	class:ATPG::NODE
 parse_line	input.cpp	/^void ATPG::parse_line(const string &line) {$/;"	f	class:ATPG
@@ -180,6 +181,7 @@ sim	sim.cpp	/^void ATPG::sim() {$/;"	f	class:ATPG
 sort_wlist	atpg.h	/^  vector<wptr> sort_wlist;             \/* sorted wire list with regard to level *\/$/;"	m	class:ATPG
 targc	atpg.h	/^  int targc;                           \/* number of args on current command line *\/$/;"	m	class:ATPG
 targv	atpg.h	/^  string targv[100];                   \/* tokens on current command line *\/$/;"	m	class:ATPG
+tdfault_sim_a_vector	tdfsim.cpp	/^void ATPG::tdfault_sim_a_vector(const string &vec, int &num_of_current_detect) {$/;"	f	class:ATPG
 tdfsim_only	atpg.h	/^  bool tdfsim_only;                    \/* flag to indicate tdfault simulation only *\/$/;"	m	class:ATPG
 test	atpg.cpp	/^void ATPG::test() {$/;"	f	class:ATPG
 test_possible	podem.cpp	/^ATPG::wptr ATPG::test_possible(const fptr fault) {$/;"	f	class:ATPG
