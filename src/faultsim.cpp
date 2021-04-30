@@ -174,10 +174,10 @@ void ATPG::fault_sim_a_vector(const string &vec, int &num_of_current_detect) {
               num_of_fault++;
               start_wire_index = min(start_wire_index, f->to_swlist);
             }
-          }
-        }
-      } // if  gate input fault
-    } // if fault is active
+          }//end if faulty_wire != NULL
+        }//end if gate input fault
+      } //end if gate is not PO
+    } //end if fault is active
 
 
     /*
