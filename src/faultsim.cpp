@@ -350,9 +350,14 @@ ATPG::wptr ATPG::get_faulty_wire(const fptr f, int &fault_type) {
 
     /* this case should not occur,
      * because we do not create fault in the NOT BUF gate input */
+     //my modified
+     //this case should happened in tdfsim
     case NOT:
+       fault_type = (f->fault_type == STR)? STF: STR; 
+       break;
     case BUF:
-      fprintf(stdout, "something is fishy(get_faulty_net)...\n");
+      //fprintf(stdout, "something is fishy(get_faulty_net)...\n");
+      fault_type = (f->fault_type == STR)? STR: STF;
       break;
 
       /*check every gate input of AND

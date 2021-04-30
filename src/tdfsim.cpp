@@ -241,7 +241,6 @@ void ATPG::generate_tdfault_list() {
         //target gate
         n = w->inode.front();
 
-
         //create a gate output SA0 for target gate
         //create a new fault
         f = move(fptr_s(new(nothrow) FAULT));
@@ -326,5 +325,4 @@ void ATPG::generate_tdfault_list() {
 	    ++num_of_tdf_fault;
 	    //cout << f->fault_no << f->node->name << ":" << (f->io?"O":"I") << (f->io?9:(f->index)) << "SA" << f->fault_type << endl;
 	}
-    fprintf(stdout, "#number of equivalent faults = %d\n", num_of_tdf_fault);
 }//end gen fault list
