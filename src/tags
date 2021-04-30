@@ -57,6 +57,7 @@ WIRE	atpg.cpp	/^ATPG::WIRE::WIRE() {$/;"	f	class:ATPG::WIRE
 WIRE	atpg.h	/^  class WIRE {$/;"	c	class:ATPG
 XOR	atpg.h	33;"	d
 XORTABLE	logic_tbl.h	/^int XORTABLE[MULTIVALUE][MULTIVALUE] = {0, 1, U, D, B,$/;"	v
+actived_fault_list	atpg.h	/^  vector<fptr> actived_fault_list;$/;"	m	class:ATPG
 backtrack_limit	atpg.h	/^  int backtrack_limit;$/;"	m	class:ATPG
 backward_imply	podem.cpp	/^int ATPG::backward_imply(const wptr current_wire, const int &desired_logic_value) {$/;"	f	class:ATPG
 check_test	podem.cpp	/^bool ATPG::check_test() {$/;"	f	class:ATPG
@@ -142,6 +143,7 @@ nptr_s	atpg.h	/^  typedef unique_ptr<NODE> nptr_s;    \/* using smart pointer to
 num_of_faults_in_parallel	faultsim.cpp	11;"	d	file:
 num_of_gate_fault	atpg.h	/^  int num_of_gate_fault;    \/\/ total number of gate-level uncollapsed faults in the whole circuit$/;"	m	class:ATPG
 num_of_pattern	tdfsim.cpp	12;"	d	file:
+num_of_tdf_fault	atpg.h	/^  int num_of_tdf_fault;$/;"	m	class:ATPG
 num_of_tdfaults_in_parallel	tdfsim.cpp	13;"	d	file:
 onode	atpg.h	/^    vector<nptr> onode;        \/* nodes driven by this wire *\/$/;"	m	class:ATPG::WIRE
 owire	atpg.h	/^    vector<wptr> owire;        \/* wires driven by this node *\/$/;"	m	class:ATPG::NODE
@@ -182,6 +184,7 @@ sort_wlist	atpg.h	/^  vector<wptr> sort_wlist;             \/* sorted wire list 
 targc	atpg.h	/^  int targc;                           \/* number of args on current command line *\/$/;"	m	class:ATPG
 targv	atpg.h	/^  string targv[100];                   \/* tokens on current command line *\/$/;"	m	class:ATPG
 tdfault_sim_a_vector	tdfsim.cpp	/^void ATPG::tdfault_sim_a_vector(const string &vec, int &num_of_current_detect) {$/;"	f	class:ATPG
+tdfault_sim_a_vector2	tdfsim.cpp	/^void ATPG::tdfault_sim_a_vector2(const string &vec, int &num_of_current_detect) {$/;"	f	class:ATPG
 tdfsim_only	atpg.h	/^  bool tdfsim_only;                    \/* flag to indicate tdfault simulation only *\/$/;"	m	class:ATPG
 test	atpg.cpp	/^void ATPG::test() {$/;"	f	class:ATPG
 test_possible	podem.cpp	/^ATPG::wptr ATPG::test_possible(const fptr fault) {$/;"	f	class:ATPG

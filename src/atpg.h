@@ -90,9 +90,10 @@ class ATPG {
   void transition_delay_fault_simulation(int &);
   void tdfault_sim_a_vector(const string &, int &);
   void tdfault_sim_a_vector2(const string &, int &);
-  int num_of_tdf_fault{};
+  int num_of_tdf_fault;
   int detected_num{};
   bool get_tdfsim_only() { return tdfsim_only; }
+  //vector<fptr> actived_fault_list;
 
   /* defined in atpg.cpp */
   void test();
@@ -115,6 +116,8 @@ class ATPG {
   /* fault list */
   forward_list<fptr_s> flist;          /* fault list */
   forward_list<fptr> flist_undetect;   /* undetected fault list */
+  //my fault list
+  vector<fptr> actived_fault_list;
 
   /* circuit */
   vector<wptr> sort_wlist;             /* sorted wire list with regard to level */

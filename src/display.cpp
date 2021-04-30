@@ -99,7 +99,7 @@ void ATPG::display_io() {
     }
   }
   fprintf(stdout, "'");
-/*  debug use
+  //debug use
   fprintf(stdout," ");
   for (i = 0; i < cktout.size(); i++) {
     switch (cktout[i]->value) {
@@ -107,10 +107,10 @@ void ATPG::display_io() {
       case 1: fprintf(stdout,"1"); break;
       case U: fprintf(stdout,"x"); break;
       case D: fprintf(stdout,"D"); break;
-      case B: fprintf(stdout,"B"); break;
+      case D_bar: fprintf(stdout,"B"); break;
     }
   }
-*/
+
   fprintf(stdout, "\n");
 }/* end of display_io */
 

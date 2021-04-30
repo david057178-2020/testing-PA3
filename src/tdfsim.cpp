@@ -33,6 +33,9 @@ void ATPG::tdfault_sim_a_vector(const string &vec, int &num_of_current_detect) {
     const int numI = cktin.size();
     const int numCkt = sort_wlist.size();
 
+    //init num_of_current_detect
+    num_of_current_detect = 0;
+
     //for every input, set value to the current vector value V1
     for(int i = 0; i < numI; ++i){
         cktin[i]->value = ctoi(vec[i]);
@@ -47,150 +50,173 @@ void ATPG::tdfault_sim_a_vector(const string &vec, int &num_of_current_detect) {
     //do a fault free sim
     sim();
 
-    //some declare for parallel fault sim
-    fptr simulated_fault_list[num_of_tdfaults_in_parallel];
-    int num_of_fault = 0;
-    int start_wire_index = 10000;
+    //reset the actived fault list
+    actived_fault_list.clear();
+    actived_fault_list.reserve(num_of_tdf_fault);
     
     //for every undetected fault, check which faults are activated
     for (auto pos = flist_undetect.cbegin(); pos != flist_undetect.cend(); ++pos) {
         fptr f = *pos;
         //consider only active fault
         if (f->fault_type == sort_wlist[f->to_swlist]->value) {
-            //add the fault to the simulated fault list and inject the fault
-            simulated_fault_list[num_of_fault] = f;
-            ++num_of_fault;
+            //add the fault to the actived fault list
+            actived_fault_list.push_back(f);
         }
+    }
+    
+    //do SSA with V2
+    string V2 (vec, numI, 1);
+    V2.append(vec, 0, numI-1);  
+    tdfault_sim_a_vector2(V2, num_of_current_detect);
+}
 
-        //if packet is full or no more undetected fault => do fault sim
-        if ((num_of_fault == num_of_faults_in_parallel) || (next(pos, 1) == flist_undetect.cend())) {
-            //shift in a bit and obtain V2 pattern
-            for(int i = numI; i > 0; --i){
-                if(cktin[i]->value != cktin[i-1]->value){
-                    cktin[i]->set_changed();
-                    cktin[i]->value = cktin[i-1]->value;
-                }
-            }
-            if(cktin[0] != ctoi(vec[numI])){
-                cktin[0] = ctoi(vec[numI]);
-                cktin[0]->set_changed();
-            }
-   		    //do a fault free sim for V2
-		    sim();
+void ATPG::tdfault_sim_a_vector2(const string &vec, int &num_of_current_detect) {
+    const int numI = cktin.size();
+    const int numCkt = sort_wlist.size();
+    //set input
+    for(int i = 0; i < numI; ++i){
+        if(cktin[i]->value != ctoi(vec[i])){
+            cktin[i]->value = ctoi(vec[i]);
+            cktin[i]->set_changed();
+        }
+    }
+    //do sim
+    sim();
 
-            //expand the fault-free value into 32 bits, store it in wire_value1 and wire_value2
-		    for(int i = 0; i < numCkt; ++i){
-		        switch (sort_wlist[i]->value) {
-		            case 2:
-		                sort_wlist[i]->wire_value1 = 0x55555555; // 01 represents unknown
-		                sort_wlist[i]->wire_value2 = 0x55555555;
-		                break;
-		            case 1:
-		                sort_wlist[i]->wire_value1 = ALL_ONE;  // 11 represents logic one
-		                sort_wlist[i]->wire_value2 = ALL_ONE;
-		                break;
-		            case 0:
-		                sort_wlist[i]->wire_value1 = ALL_ZERO; // 00 represents logic zero
-		                sort_wlist[i]->wire_value2 = ALL_ZERO;
-		                break;
-		        }
-		    }
-		
-            //for each fault in list
-            for(auto fp: simulated_fault_list){
-                //if f is gate output fault
-	            if(fp->io == GO){
+    //expand the fault-free value into 32 bits, store it in wire_value1 and wire_value2
+	for (int i = 0; i < numCkt; i++) {
+		switch (sort_wlist[i]->value) {
+			case 1:
+				sort_wlist[i]->wire_value1 = ALL_ONE;	// 11 represents logic one
+				sort_wlist[i]->wire_value2 = ALL_ONE;
+				break;
+			case 2:
+				sort_wlist[i]->wire_value1 = 0x55555555; // 01 represents unknown
+				sort_wlist[i]->wire_value2 = 0x55555555;
+				break;
+			case 0:
+				sort_wlist[i]->wire_value1 = ALL_ZERO; // 00 represents logic zero
+				sort_wlist[i]->wire_value2 = ALL_ZERO;
+				break;
+		}
+	}
+
+    //declare for parallel sim
+    fptr simulated_fault_list[num_of_tdfaults_in_parallel];
+    int start_wire_index = 10000;
+    int num_of_fault = 0;
+    //for every actived fault, check detected
+    for(auto pos = actived_fault_list.begin(); pos != actived_fault_list.end(); ++pos){
+        fptr f = *pos;
+
+        //only consider activated fault
+        if(f->fault_type != sort_wlist[f->to_swlist]->value) {
+	        //if f is PO or directly connected to PO => detected
+	        if ((f->node->type == OUTPUT) ||
+	            (f->io == GO && sort_wlist[f->to_swlist]->is_output())) {
+	            f->detect = TRUE;
+	        }
+	        else{
+	            //if f is gate output fault
+	            if(f->io == GO){
 	                //if this wire is not yet marked as faulty
-	                if (!(sort_wlist[fp->to_swlist]->is_faulty())) {
+	                if (!(sort_wlist[f->to_swlist]->is_faulty())) {
 	                    //mark as faulty
-	                    sort_wlist[fp->to_swlist]->set_faulty();
+	                    sort_wlist[f->to_swlist]->set_faulty();
 	                    //insert the corresponding wire to the list of faulty wires
-	                    wlist_faulty.push_front(sort_wlist[fp->to_swlist]);
+	                    wlist_faulty.push_front(sort_wlist[f->to_swlist]);
 	                }
 	
 	                //add the fault to the simulated fault list and inject the fault
 	                simulated_fault_list[num_of_fault] = f;
-	                inject_fault_value(sort_wlist[fp->to_swlist], num_of_fault, fp->fault_type);
+	                inject_fault_value(sort_wlist[f->to_swlist], num_of_fault, f->fault_type);
 	
 	                //mark the wire as having a fault injected
-	                sort_wlist[fp->to_swlist]->set_fault_injected();
+	                sort_wlist[f->to_swlist]->set_fault_injected();
 	                //schedule the outputs of this gate 
-	                for (auto pos_n : sort_wlist[fp->to_swlist]->onode) {
+	                for (auto pos_n : sort_wlist[f->to_swlist]->onode) {
 	                    pos_n->owire.front()->set_scheduled();
 	                }
 	
 	                //increment the number of simulated faults in this packet
 	                num_of_fault++;
 	                //start_wire_index keeps track of the smallest level of fault in this packet.
-	                start_wire_index = min(start_wire_index, fp->to_swlist);
+	                start_wire_index = min(start_wire_index, f->to_swlist);
 	            }//end f is gate output fault
 	
 	            //if f is gate input fault
-                else{
+	            else{
 	                //check if f is propagated to gate output
-	                faulty_wire = get_faulty_wire(f, fault_type);
+	                int fault_type;
+	                wptr faulty_wire = get_faulty_wire(f, fault_type);
 	                if (faulty_wire != nullptr) {
-	                    //if faulty_wire is not already marked as faulty
-	                    if (!(faulty_wire->is_faulty())) {
-	                        //mark it as faulty
-	                        faulty_wire->set_faulty();
-	                        //add the wire to the list of faulty wires.
-	                        wlist_faulty.push_front(faulty_wire);
+	                    // if the faulty_wire is PO => detected
+	                    if (faulty_wire->is_output()) {
+	                        f->detect = TRUE;
 	                    }
-	    
-	                    //add the fault to the simulated list and inject it
-	                    simulated_fault_list[num_of_fault] = f;
-	                    inject_fault_value(faulty_wire, num_of_fault, fault_type);
-	    
-	                    //mark the faulty_wire as having a fault injected
-	                    faulty_wire->set_fault_injected();
-	                    //schedule the outputs of this gate
-	                    for (auto pos_n : faulty_wire->onode) {
-	                        pos_n->owire.front()->set_scheduled();
-	                    }
-	                    num_of_fault++;
-	                    start_wire_index = min(start_wire_index, fp->to_swlist);
+	                    else{
+		                    //if faulty_wire is not already marked as faulty
+		                    if (!(faulty_wire->is_faulty())) {
+		                        //mark it as faulty
+		                        faulty_wire->set_faulty();
+		                        //add the wire to the list of faulty wires.
+		                        wlist_faulty.push_front(faulty_wire);
+		                    }
+		
+		                    //add the fault to the simulated list and inject it
+		                    simulated_fault_list[num_of_fault] = f;
+		                    inject_fault_value(faulty_wire, num_of_fault, fault_type);
+		
+		                    //mark the faulty_wire as having a fault injected
+		                    faulty_wire->set_fault_injected();
+		                    //schedule the outputs of this gate
+		                    for (auto pos_n : faulty_wire->onode) {
+		                        pos_n->owire.front()->set_scheduled();
+		                    }
+		                    num_of_fault++;
+		                    start_wire_index = min(start_wire_index, f->to_swlist);
+	                    }//end f is not PO
 	                }//end if faulty_wire != NULL
 	            }//end if f is gate input fault
-            }//end for each fault in list
+	        }//end f is not PO
+        }//if fault is activate 
 
-            //do fault sim
-            // starting with start_wire_index, evaulate all scheduled wires
-            for (int i = start_wire_index; i < numCkt; ++i) {
+	    //if full or no remaining faults => do fault sim
+	    if ((num_of_fault == num_of_tdfaults_in_parallel) || (next(pos, 1) == actived_fault_list.end())) {
+	        // starting with start_wire_index, evaulate all scheduled wires
+	        for (int i = start_wire_index; i < numCkt; ++i) {
 	            if (sort_wlist[i]->is_scheduled()) {
 	                sort_wlist[i]->remove_scheduled();
 	                fault_sim_evaluate(sort_wlist[i]);
 	            }
 	        }
-            
-            //check all faulty wire
-            while (!wlist_faulty.empty()) {
-			    wptr w = wlist_faulty.front();
-			    wlist_faulty.pop_front();
-			    w->remove_faulty();
-			    w->remove_fault_injected();
-			    w->set_fault_free();
-
-                if (w->is_output()) { // if primary output
-			        for (int i = 0; i < num_of_fault; ++i) { // check every undetected fault
-			            if (!(simulated_fault_list[i]->detect)) {
-			                if ((w->wire_value2 & Mask[i]) ^    // if value1 != value2
-			                    (w->wire_value1 & Mask[i])) {
-			                    if (((w->wire_value2 & Mask[i]) ^ Unknown[i]) &&  // and not unknowns
-			                        ((w->wire_value1 & Mask[i]) ^ Unknown[i])) {
-			                        fault_detected[i] = 1;// then the fault is detected
-			                    }
-			                }
-			            }
-			        }
-			    }
-			    w->wire_value2 = w->wire_value1;  // reset to fault-free values
-                
-            }//end pop out all faulty wires
-			num_of_fault = 0;  // reset the counter of faults in a packet
-            start_wire_index = 10000;  //reset this index to a very large value.
-        }//end parallel fault sim
-    }//end for every undetected fault
+	        //check all faulty wire
+	        while (!wlist_faulty.empty()) {
+	            wptr w = wlist_faulty.front();
+	            wlist_faulty.pop_front();
+	            w->remove_faulty();
+	            w->remove_fault_injected();
+	            w->set_fault_free();
+	
+	            if (w->is_output()) { // if primary output
+	                for (int i = 0; i < num_of_fault; ++i) { // check every actived fault in parallel
+	                    if (!(simulated_fault_list[i]->detect)) {
+	                        if ((w->wire_value2 & Mask[i]) ^    // if value1 != value2
+	                            (w->wire_value1 & Mask[i])) {
+	                            if (((w->wire_value2 & Mask[i]) ^ Unknown[i]) &&  // and not unknowns
+	                                ((w->wire_value1 & Mask[i]) ^ Unknown[i])) {
+	                                simulated_fault_list[i]->detect = TRUE;
+                                }
+	                        }
+	                    }
+	                }//end for every actived fault
+	            }
+	            w->wire_value2 = w->wire_value1;  // reset to fault-free values
+	        }//end pop out all faulty wires
+	        num_of_fault = 0;  // reset the counter of faults in a packet
+	        start_wire_index = 10000;  //reset this index to a very large value.
+	    }//end do fault sim
+	}//end for every actived fault
 
     //drop fault
     flist_undetect.remove_if(
@@ -202,10 +228,6 @@ void ATPG::tdfault_sim_a_vector(const string &vec, int &num_of_current_detect) {
           return false;
         }
       });
-}
-
-void ATPG::tdfault_sim_a_vector2(const string &vec, int &num_of_current_detect) {
-
 }
 
 void ATPG::generate_tdfault_list() {
@@ -298,11 +320,11 @@ void ATPG::generate_tdfault_list() {
     flist.reverse();
     flist_undetect.reverse();
     /*walk through all faults, assign fault_no one by one  */
-	int fault_num = 0;
+	num_of_tdf_fault = 0;
 	for (fptr f: flist_undetect) {
-	    f->fault_no = fault_num;
-	    ++fault_num;
+	    f->fault_no = num_of_tdf_fault;
+	    ++num_of_tdf_fault;
 	    //cout << f->fault_no << f->node->name << ":" << (f->io?"O":"I") << (f->io?9:(f->index)) << "SA" << f->fault_type << endl;
 	}
-    fprintf(stdout, "#number of equivalent faults = %d\n", fault_num);
+    fprintf(stdout, "#number of equivalent faults = %d\n", num_of_tdf_fault);
 }//end gen fault list
