@@ -1,0 +1,4 @@
+154c154
+< #atpg: cputime for test pattern generation ../sample_circuits/c2670.ckt: 0.1s 0.2s
+---
+> #atpg: cputime for test pattern generation ../sample_circuits/c2670.ckt: 0.2s 0.2s
